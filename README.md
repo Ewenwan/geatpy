@@ -1,5 +1,21 @@
-# **Geatpy2** 
+# **Geatpy2 高性能的进化算法框架 ** 
 The Genetic and Evolutionary Algorithm Toolbox for Python with high performance.
+
+Geatpy2整体上看由工具箱内核函数（内核层）和面向对象进化算法框架（框架层）两部分组成。其中面向对象进化算法框架主要有四个大类：Problem问题类、Algorithm算法模板类、Population种群类和PsyPopulation多染色体种群类。
+
+Problem 类定义了与问题相关的一些信息，如问题名称name、优化目标的维数M、决策变量的个数Dim、决策变量的范围ranges、决策变量的边界borders 等。maxormins是一个记录着各个目标函数是最小化抑或是最大化的行向量，其中元素为1 表示对应的目标是最小化目标；为-1 表示对应的是最大化目标。例如M=3，maxormins=np.array([1,-1,1])，此时表示有三个优化目标，其中第一、第三个是最小化目标，第二个是最大化目标。varTypes 是一个记录着决策变量类型的行向量，其中的元素为0 表示对应的决策变量是连续型变量；为1 表示对应的是离散型变量。待求解的目标函数定义在aimFunc() 的函数中。calBest() 函数则用于从理论上计算目标函数的理论最优值。在实际使用时，不是直接在Problem 类的文件中修改相关代码使用的，而是通过定义一个继承Problem的子类来完成对问题的定义的。这些在后面的章节中会详细讲述。对于Problem 类中各属性的详细含义可查看Problem.py 源码。
+
+Population 类是一个表示种群的类。一个种群包含很多个个体，而每个个体都有一条染色体(若要用多染色体，则使用多个种群、并把每个种群对应个体关联起来即可)。除了染色体外，每个个体都有一个译码矩阵Field(或俗称区域描述器) 来标识染色体应该如何解码得到表现型，同时也有其对应的目标函数值以及适应度。种群类就是一个把所有个体的这些数据统一存储起来的一个类。比如里面的Chrom 是一个存储种群所有个体染色体的矩阵，它的每一行对应一个个体的染色体；ObjV 是一个目标函数值矩阵，每一行对应一个个体的所有目标函数值，每一列对应一个目标。对于Population 类中各属性的详细含义可查看Population.py 源码以及下一章“Geatpy 数据结构”。
+
+PsyPopulation类是继承了Population的支持多染色体混合编码的种群类。一个种群包含很多个个体，而每个个体都有多条染色体。用Chroms列表存储所有的染色体矩阵(Chrom)；Encodings列表存储各染色体对应的编码方式(Encoding)；Fields列表存储各染色体对应的译码矩阵(Field)。
+
+Algorithm 类是进化算法的核心类。它既存储着跟进化算法相关的一些参数，同时也在其继承类中实现具体的进化算法。比如Geatpy 中的moea_NSGA3_templet.py 是实现了多目标优化NSGA-III 算法的进化算法模板类，它是继承了Algorithm 类的具体算法的模板类。关于Algorithm 类中各属性的含义可以查看Algorithm.py 源码。这些算法模板通过调用Geatpy 工具箱提供的进化算法库函数实现对种群的进化操作，同时记录进化过程中的相关信息
+
+[单目标优化案例：](https://github.com/geatpy-dev/geatpy/tree/master/geatpy/demo/soea_demo)
+
+[多目标优化案例：](https://github.com/geatpy-dev/geatpy/tree/master/geatpy/demo/moea_demo)
+
+[标准测试平台（包含单目标、多目标、超多目标、旅行商问题等的测试集](https://github.com/geatpy-dev/geatpy/tree/master/geatpy/testbed)
 
 ![Travis](https://travis-ci.org/geatpy-dev/geatpy.svg?branch=master)
 [![Package Status](https://img.shields.io/pypi/status/geatpy.svg)](https://pypi.org/project/geatpy/)
