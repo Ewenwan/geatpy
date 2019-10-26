@@ -1,6 +1,8 @@
 # **Geatpy2 高性能的进化算法框架 ** 
 The Genetic and Evolutionary Algorithm Toolbox for Python with high performance.
 
+[神经进化](https://github.com/Ewenwan/ENNEoS/blob/master/README.md)
+
 进化算法(Evolutionary Algorithm, EA)是一类通过模拟自然界生物自然选择和自然进化的随机搜索算法。与传统搜索算法如二分法、斐波那契法、牛顿法、抛物线法等相比，进化算法有着高鲁棒性和求解高度复杂的非线性问题(如NP完全问题)的能力。在过去的40年中，进化算法得到了不同的发展，现主要有三类：1)主要由美国J. H. Holland提出的的遗传算法(Genetic Algorithm, GA)；2)主要由德国I. Rechenberg提出的进化策略(Evolution strategies, ES)；3)主要由美国的L. J. Fogel提出的进化规划(Evolutionary Programming, EP)。
 
 Geatpy2整体上看由工具箱内核函数（内核层）和面向对象进化算法框架（框架层）两部分组成。其中面向对象进化算法框架主要有四个大类：Problem问题类、Algorithm算法模板类、Population种群类和PsyPopulation多染色体种群类。
