@@ -1,6 +1,8 @@
 # **Geatpy2 高性能的进化算法框架 ** 
 The Genetic and Evolutionary Algorithm Toolbox for Python with high performance.
 
+进化算法(Evolutionary Algorithm, EA)是一类通过模拟自然界生物自然选择和自然进化的随机搜索算法。与传统搜索算法如二分法、斐波那契法、牛顿法、抛物线法等相比，进化算法有着高鲁棒性和求解高度复杂的非线性问题(如NP完全问题)的能力。在过去的40年中，进化算法得到了不同的发展，现主要有三类：1)主要由美国J. H. Holland提出的的遗传算法(Genetic Algorithm, GA)；2)主要由德国I. Rechenberg提出的进化策略(Evolution strategies, ES)；3)主要由美国的L. J. Fogel提出的进化规划(Evolutionary Programming, EP)。
+
 Geatpy2整体上看由工具箱内核函数（内核层）和面向对象进化算法框架（框架层）两部分组成。其中面向对象进化算法框架主要有四个大类：Problem问题类、Algorithm算法模板类、Population种群类和PsyPopulation多染色体种群类。
 
 Problem 类定义了与问题相关的一些信息，如问题名称name、优化目标的维数M、决策变量的个数Dim、决策变量的范围ranges、决策变量的边界borders 等。maxormins是一个记录着各个目标函数是最小化抑或是最大化的行向量，其中元素为1 表示对应的目标是最小化目标；为-1 表示对应的是最大化目标。例如M=3，maxormins=np.array([1,-1,1])，此时表示有三个优化目标，其中第一、第三个是最小化目标，第二个是最大化目标。varTypes 是一个记录着决策变量类型的行向量，其中的元素为0 表示对应的决策变量是连续型变量；为1 表示对应的是离散型变量。待求解的目标函数定义在aimFunc() 的函数中。calBest() 函数则用于从理论上计算目标函数的理论最优值。在实际使用时，不是直接在Problem 类的文件中修改相关代码使用的，而是通过定义一个继承Problem的子类来完成对问题的定义的。这些在后面的章节中会详细讲述。对于Problem 类中各属性的详细含义可查看Problem.py 源码。
